@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-class Api extends BaseModel
+class ApiDetails extends BaseModel
 {
     /**
      * The attributes that are mass assignable.
@@ -10,7 +10,7 @@ class Api extends BaseModel
      * @var array
      */
     protected $fillable = [
-        'name', 'code', 'type', 'source_id'
+        'name', 'code', 'url', 'type', 'source_id', 'request_method'
     ];
 
     /**
@@ -32,6 +32,6 @@ class Api extends BaseModel
     ];
 
     public $updateFields = [
-        'id', 'name', 'code', 'type', 'source_id'
+        'id', 'name', 'code', 'url', 'type', 'source_id', 'request_method'
     ];
 }

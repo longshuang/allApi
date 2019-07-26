@@ -1,6 +1,6 @@
 <?php
 /**
- * api 验证类
+ * api详情 验证类
  * User: long
  * Date: 2019/7/25
  * Time: 11:39
@@ -10,19 +10,19 @@ namespace App\Http\Validate\Admin;
 
 use App\Http\Validate\BaseValidate;
 
-class ApiValidate extends BaseValidate
+class ApiDetailsValidate extends BaseValidate
 {
     public $rules = [
         'id' => ['required', 'integer'],
         'name' => ['required', 'string', 'max:30', 'uniqueIgnore:apis,id'],
-        'code' => ['required', 'string', 'max:20', 'uniqueIgnore:apis,id'],
-        'type' => ['required', 'integer'],
-        'source_id' => ['required', 'integer'],
+        'code' => ['required', 'string', 'max:20'],
+        'url' => ['required', 'string', 'max:200', 'url'],
+        'request_method' => ['string', 'max:100'],
     ];
 
     public $scene = [
-        'store' => ['name', 'code', 'type', 'source_id'],
-        'update' => ['id', 'name', 'code', 'type', 'source_id'],
+        'store' => ['name', 'code', 'url', 'request_method'],
+        'update' => ['id', 'name', 'code', 'url', 'request_method'],
         'destroy' => ['id']
     ];
 

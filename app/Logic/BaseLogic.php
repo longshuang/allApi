@@ -23,7 +23,7 @@ use Illuminate\Support\Arr;
  */
 abstract class BaseLogic
 {
-    use FactoryInstanceTrait;
+    use FactoryInstanceTrait, WhereTrait;
 
     public $model;
 
@@ -151,6 +151,19 @@ abstract class BaseLogic
         return $this->query->update($param);
     }
 
+    /**
+     * 批量修改
+     * @param $where
+     * @param $param
+     * @return int
+     * @throws BusinessLogicException
+     */
+    public function updateAll($where, $param)
+    {
+        WhereTrait::buildWhere($this->query, $where);
+        return $this->query->update($param);
+    }
+
 
     /**
      * 删除
@@ -163,4 +176,14 @@ abstract class BaseLogic
         return $this->query->delete();
     }
 
+    /**
+     * 批量删除
+     * @param $where
+     * @throws BusinessLogicException
+     */
+    public function deleteAll($where)
+    {
+        WhereTrait::buildWhere($this->query, $where);
+        $this->query->where($where)->delete();
+    }
 }

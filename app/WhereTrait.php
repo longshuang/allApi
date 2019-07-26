@@ -11,7 +11,7 @@ namespace App;
 use App\Exceptions\BusinessLogicException;
 use Illuminate\Database\Eloquent\Builder;
 
-class WhereTrait
+trait WhereTrait
 {
 
     /**

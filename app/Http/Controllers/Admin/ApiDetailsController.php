@@ -1,28 +1,22 @@
 <?php
 /**
- * Api接口
+ * api详情接口
  * User: long
- * Date: 2019/7/25
- * Time: 14:25
+ * Date: 2019/7/26
+ * Time: 14:43
  */
 
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Controllers\TransactionManager;
-use App\Logic\Admin\ApiLogic;
+use App\Logic\Admin\ApiDetailsLogic;
 use Illuminate\Http\Request;
 
-/**
- * Class ApiController
- * @package App\Http\Controllers\Admin
- * @property ApiLogic $logic
- */
-class ApiController extends Controller
+class ApiDetailsController extends Controller
 {
-    public function __construct(Request $request, ApiLogic $logic)
+    public function __construct(Request $request, ApiDetailsLogic $logic)
     {
-        $this->logic = new TransactionManager($logic);
+        $this->logic = $logic;
         $this->data = $request->all();
     }
 
@@ -88,14 +82,8 @@ class ApiController extends Controller
     }
 
 
-    /**
-     * 删除
-     * @return mixed|void
-     * @throws \App\Exceptions\BusinessLogicException
-     */
     public function destroy()
     {
         return $this->logic->destroy($this->data);
     }
-
 }

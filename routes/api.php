@@ -54,6 +54,18 @@ Route::middleware('auth:api')->namespace('Admin')->prefix('admin')->group(functi
         Route::delete('/', 'ApiController@destroy');
     });
 
+    //api接口详情
+    Route::prefix('api_details')->group(function () {
+        Route::get('/initIndex', 'ApiDetailsController@initIndex');
+        Route::get('/', 'ApiDetailsController@index');
+        //Route::get('/api', 'ApiDetailsController@show');
+        Route::post('/', 'ApiDetailsController@store');
+        Route::get('/initAdd', 'ApiDetailsController@initAdd');
+        Route::get('/initEdit', 'ApiDetailsController@initEdit');
+        Route::put('/', 'ApiDetailsController@update');
+        Route::delete('/', 'ApiDetailsController@destroy');
+    });
+
     //类型接口
     Route::prefix('type')->group(function () {
         Route::get('/', 'TypeController@index');
