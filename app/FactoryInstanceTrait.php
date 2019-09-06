@@ -12,11 +12,9 @@ trait FactoryInstanceTrait
 {
     public static $instance = [];
 
-    public static function getInstance($className, $parameters = null)
+    public static function getInstance($className, $parameters = [])
     {
-        if (empty(self::$instance[$className])) {
-            self::$instance[$className] = new $className($parameters);
-        }
-        return self::$instance[$className];
+        app()->singleton($className);
+        return app()->make($className, $parameters);
     }
 }
