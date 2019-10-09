@@ -13,11 +13,10 @@ use App\Logic\Admin\ApiDetailsLogic;
 use App\Logic\Admin\SourceLogic;
 use App\Logic\Admin\TypeLogic;
 use App\Logic\BaseLogic;
-use App\Models\Type;
+use App\Models\Api;
 
 class ApiLogic extends BaseLogic
 {
-
     public $searchFields = [
         'name' => ['like'],
         'type' => ['=']
@@ -25,7 +24,7 @@ class ApiLogic extends BaseLogic
 
     public function _init()
     {
-        $this->model = new Type();
+        $this->model = new Api();
         $this->query = $this->model::query();
     }
 
@@ -79,21 +78,4 @@ class ApiLogic extends BaseLogic
         $data = $this->getApiDetailsLogic()->getList(['code' => $params['code']]);
         return $data;
     }
-
-
-    /**
-     * 获取详细信息
-     * @param $params
-     * @throws BusinessLogicException
-     * @throws \Throwable
-     */
-    public function getDetail($params)
-    {
-        $data = parent::getInfo(['id' => $params['detail_id']]);
-        throw_if(empty($data), new BusinessLogicException('数据不存在'));
-        $source = $this->getSourceLogic()->getInfo(['id' => $data['source_id']]);
-        throw_if(empty($data), new BusinessLogicException('来源不存在'));
-
-    }
-
 }

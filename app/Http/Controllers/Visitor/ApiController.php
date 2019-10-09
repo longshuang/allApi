@@ -55,9 +55,4 @@ class ApiController extends Controller
     {
         return $this->logic->getDetailList($this->data);
     }
-
-    public function getDetail()
-    {
-        return $this->logic->getDetail($this->data);
-    }
 }
