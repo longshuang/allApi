@@ -13,7 +13,9 @@ use App\Models\BaseModel;
 use App\Exceptions\BusinessLogicException;
 use App\WhereTrait;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Log\Logger;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Log;
 
 /**
  * Class BaseLogic

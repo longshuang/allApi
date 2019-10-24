@@ -36,14 +36,14 @@ return [
     'channels' => [
         'stack' => [
             'driver' => 'stack',
-            'channels' => ['daily'],
+            'channels' => ['daily', 'custom'],
             'ignore_exceptions' => false,
         ],
 
         'single' => [
             'driver' => 'single',
             'path' => storage_path('logs/laravel.log'),
-            'level' => 'debug',
+            'level' => 'error',
         ],
 
         'daily' => [
@@ -87,7 +87,14 @@ return [
 
         'errorlog' => [
             'driver' => 'errorlog',
-            'level' => 'debug',
+            'level' => 'error',
+        ],
+
+        'custom' => [
+            'driver' => 'custom',
+            'via' => \App\Log\ErrorLog::class,
+            'path' => storage_path('logs/laravel.log'),
+            'level' => 'error',
         ],
     ],
 

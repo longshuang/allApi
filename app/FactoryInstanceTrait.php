@@ -8,6 +8,11 @@
 
 namespace App;
 
+/**
+ * Trait FactoryInstanceTrait
+ * @package App
+ * @method static Route
+ */
 trait FactoryInstanceTrait
 {
     public static $instance = [];

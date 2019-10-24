@@ -38,10 +38,12 @@ class Kernel extends HttpKernel
         ],
 
         'api' => [
+            'logBefore',
             'throttle:60,1',
             'bindings',
             'validate',
-            'response'
+            'response',
+            'logAfter',
         ],
     ];
 
@@ -53,6 +55,7 @@ class Kernel extends HttpKernel
      * @var array
      */
     protected $routeMiddleware = [
+        'logBefore' => \App\Http\Middleware\LogBefore::class,
         'auth' => \App\Http\Middleware\Authenticate::class,
         'auth.basic' => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
         'bindings' => \Illuminate\Routing\Middleware\SubstituteBindings::class,
@@ -64,6 +67,7 @@ class Kernel extends HttpKernel
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'validate' => \App\Http\Middleware\Validate::class,
         'response' => \App\Http\Middleware\Response::class,
+        'logAfter' => \App\Http\Middleware\LogAfter::class,
     ];
 
     /**

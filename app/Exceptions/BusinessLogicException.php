@@ -10,10 +10,33 @@ namespace App\Exceptions;
 
 use App\ResponseTrait;
 use Exception;
+use Illuminate\Support\Facades\Log;
+use Psr\Log\LoggerInterface;
+use Throwable;
 
+
+/**
+ * Class BusinessLogicException
+ * @package App\Exceptions
+ */
 class BusinessLogicException extends Exception
 {
     use ResponseTrait;
+
+    public function __construct($message = "", $code = 0, Throwable $previous = null)
+    {
+        parent::__construct($message, $code, $previous);
+    }
+
+
+    /**
+     * @param Exception $exception
+     * @throws Exception
+     */
+    public function report()
+    {
+        Log::error('错误', ['message' => $this->message, 'code' => $this->code]);
+    }
 
 
     public function render($request)

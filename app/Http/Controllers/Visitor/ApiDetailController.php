@@ -26,7 +26,21 @@ class ApiDetailController extends Controller
         $this->data = $request->all();
     }
 
+    /**
+     * 列表查询
+     * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator
+     * @throws \App\Exceptions\BusinessLogicException
+     */
+    public function index()
+    {
+        return $this->logic->getPageList();
+    }
 
+    /**
+     * 详情
+     * @throws \App\Exceptions\BusinessLogicException
+     * @throws \Throwable
+     */
     public function getInfo()
     {
         return $this->logic->getDetail($this->data);
