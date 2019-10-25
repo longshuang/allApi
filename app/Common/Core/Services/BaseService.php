@@ -6,16 +6,14 @@
  * Time: 15:19
  */
 
-namespace App\Logic;
+namespace App\Common\Core\Services;
 
-use App\FactoryInstanceTrait;
-use App\Models\BaseModel;
-use App\Exceptions\BusinessLogicException;
-use App\WhereTrait;
+use App\Common\Traits\FactoryInstanceTrait;
+use App\Common\Core\Models\BaseModel;
+use App\Common\Traits\WhereTrait;
+use App\Common\Exceptions\BusinessLogicException;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Log\Logger;
 use Illuminate\Support\Arr;
-use Illuminate\Support\Facades\Log;
 
 /**
  * Class BaseLogic
@@ -23,7 +21,7 @@ use Illuminate\Support\Facades\Log;
  * @property BaseModel $model;
  * @property Builder $query;
  */
-abstract class BaseLogic
+abstract class BaseService
 {
     use FactoryInstanceTrait, WhereTrait;
 
@@ -45,7 +43,7 @@ abstract class BaseLogic
     abstract function _init();
 
     /**
-     * 分页查询
+     *
      * @param array $where
      * @param array $selectFields
      * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator
@@ -53,7 +51,6 @@ abstract class BaseLogic
      */
     public function getPageList($selectFields = ['*'])
     {
-        Log::error('1234567');
         $this->data = request()->all();
         $where = $this->getSearchWhere();
         !empty($where) && WhereTrait::buildWhere($this->query, $where);

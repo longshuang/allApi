@@ -6,15 +6,16 @@
  * Time: 14:49
  */
 
-namespace App;
+namespace App\Common\Traits;
 
-use App\Exceptions\BusinessLogicException;
+use App\Common\Exceptions\BusinessLogicException;
 use Illuminate\Database\Eloquent\Builder;
 
 trait WhereTrait
 {
 
     /**
+     * 设置where
      * @param Builder $query
      * @param $data
      * @throws BusinessLogicException

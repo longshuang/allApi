@@ -27,6 +27,6 @@ class UserValidate extends BaseValidate
     ];
 
     public $message = [
-        'name.require' => '用户名必填'
+        'name.required' => '用户名必填'
     ];
 }

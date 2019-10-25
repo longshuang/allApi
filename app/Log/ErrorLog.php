@@ -2,8 +2,10 @@
 
 namespace App\Log;
 
+use Illuminate\Log\Events\MessageLogged;
 use Illuminate\Log\Logger;
 
+use Illuminate\Support\Facades\Log;
 use Monolog\Handler\StreamHandler;
 
 class ErrorLog
@@ -11,17 +13,12 @@ class ErrorLog
     private $config;
 
     /**
-     * @param array $config
-     * @return \Monolog\Logger
+     * @param Logger $logger
      * @throws \Exception
      */
-    public function __invoke(array $config)
+    public function __invoke($logger)
     {
-        $this->config = $config;
-        $logger = new \Monolog\Logger('default');
-        $logger->pushHandler($this->getStreamHandle());
-        $logger->pushProcessor(array($this,'sendWeChat'));
-        return $logger;
+        $logger->listen($this->sendWeChat());
     }
 
     /**
@@ -33,9 +30,15 @@ class ErrorLog
         return new StreamHandler($this->config['path'], $this->config['level']);
     }
 
-    public function sendWeChat($record)
+    public function sendWeChat()
     {
-        //队列
-        return $record;
+        return function (MessageLogged $messageLogged) {
+            $level = mb_strtoupper($messageLogged->level);
+            $a = constant('\\Monolog\\Logger::'.$level);
+            if ($a) {
+                $a = 1;
+                $b = $a + 1;
+            };
+        };
     }
 }
